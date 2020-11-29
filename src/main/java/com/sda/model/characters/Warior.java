@@ -1,5 +1,7 @@
 package com.sda.model.characters;
 
+import com.sda.model.exceptions.InvalidTypeException;
+import com.sda.model.exceptions.NoEmptySlotException;
 import com.sda.model.inventory.Armor;
 import com.sda.model.inventory.ArmorPart;
 import com.sda.model.inventory.Weapon;
@@ -28,20 +30,25 @@ public class Warior extends Hero {
         this.armor = armor;
     }
 
-    public void wearWeapon(int slot) {
+    public void wearWeapon(int slot) throws InvalidTypeException, NoEmptySlotException {
         if (super.getInventory()[slot] instanceof Weapon) {
             Weapon toWear = (Weapon) super.getInventory()[slot];
             super.getInventory()[slot] = null;
             super.addToInventory(this.weapon);
             this.weapon = toWear;
-        } else System.out.println("not a weapon");
+        } else {
+            throw new InvalidTypeException("it's not a weapon");
+        }
     }
-    public void wearArmor(int slot){
-        if (super.getInventory()[slot] instanceof ArmorPart){
+
+    public void wearArmor(int slot) throws InvalidTypeException, NoEmptySlotException {
+        if (super.getInventory()[slot] instanceof ArmorPart) {
             ArmorPart toWear = (ArmorPart) super.getInventory()[slot];
             super.getInventory()[slot] = null;
             super.addToInventory(this.armor.wearPart(toWear));
-        }else System.out.println("not a armor part");
+        } else {
+            throw new InvalidTypeException("it's not a armor");
+        }
     }
 
 }

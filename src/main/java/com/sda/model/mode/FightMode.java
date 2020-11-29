@@ -1,6 +1,8 @@
 package com.sda.model.mode;
 
 import com.sda.model.characters.*;
+import com.sda.model.exceptions.GameOverException;
+import com.sda.model.exceptions.NoEmptySlotException;
 import com.sda.model.inventory.Weapon;
 
 import java.util.Random;
@@ -13,7 +15,7 @@ public class FightMode {
         this.hero = hero;
         this.enemy = enemy;
     }
-    public void fight() {
+    public void fight() throws GameOverException, NoEmptySlotException {
 
         int heroDamage = 11;
         int heroDef = 0;
@@ -37,13 +39,13 @@ public class FightMode {
                 break;
             }
             if (enemy instanceof Monster) {
-                enemyDamage = enemyDamage + new Random().nextInt(21) / 100 * enemyDamage;
+                enemyDamage = enemyDamage + (new Random().nextInt(21) / 100) * enemyDamage;
             }
             hero.recieveDamage(enemyDamage - heroDef);
         }
         while (hero.getCurrentHealth() > 0);
         if (hero.getCurrentHealth() <= 0) {
-            System.out.println("end game U R dead");
+            throw new GameOverException("U R Dead \nGame Over");
         }
 
 

@@ -40,7 +40,7 @@ public class Armor extends ArmorPart{
                 toReturn = this.rigthLeg;
                 this.rigthLeg = toWear;
                 break;
-            //.....
+
         }
         return toReturn;
     }

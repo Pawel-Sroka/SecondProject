@@ -1,5 +1,7 @@
 package com.sda.model.characters;
 
+import com.sda.model.exceptions.InvalidTypeException;
+import com.sda.model.exceptions.NoEmptySlotException;
 import com.sda.model.inventory.Food;
 import com.sda.model.inventory.InventoryObject;
 
@@ -68,7 +70,7 @@ public class Hero implements Vunerable{
 
     }
 
-    public void eatFood(int slot) {
+    public void eatFood(int slot) throws InvalidTypeException {
         if (inventory[slot] instanceof Food) {
             Food toEat = (Food) inventory[slot];
             int sum = this.currentHealth + toEat.getHealthPointsRegeneration();
@@ -78,12 +80,15 @@ public class Hero implements Vunerable{
             } else {
                 inventory[slot] = null;
             }
-        } else System.out.println("it's not food");
+        } else {
+
+            throw new InvalidTypeException("it's not a food");
+        }
 
 
     }
 
-    public void addToInventory(InventoryObject toAdd) {
+    public void addToInventory(InventoryObject toAdd) throws NoEmptySlotException {
         boolean added = false;
         for (int i = 0; i < inventory.length; i++) {
             if (inventory[i] != null && inventory[i].equals(toAdd)) {
@@ -97,7 +102,7 @@ public class Hero implements Vunerable{
             }
         }
         if (!added) {
-            System.out.println("cannot add an item");
+            throw new NoEmptySlotException("no more room for items");
         } else {
             updateOverload();
         }
