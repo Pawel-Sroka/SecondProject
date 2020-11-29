@@ -2,9 +2,9 @@ package com.sda.model.inventory;
 
 public class ArmorPart extends InventoryObject{
     private int damageResist;
-    private String bodyParts;
+    private BodyParts bodyParts;
 
-    public ArmorPart(String name, double weight, int count, int damageResist, String bodyParts) {
+    public ArmorPart(String name, double weight, int count, int damageResist, BodyParts bodyParts) {
         super(name, weight, count);
         this.damageResist = damageResist;
         this.bodyParts = bodyParts;
@@ -18,11 +18,7 @@ public class ArmorPart extends InventoryObject{
         this.damageResist = damageResist;
     }
 
-    public String getBodyParts() {
+    public BodyParts getBodyParts() {
         return bodyParts;
-    }
-
-    public void setBodyParts(String bodyParts) {
-        this.bodyParts = bodyParts;
     }
 }

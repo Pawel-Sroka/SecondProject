@@ -37,7 +37,7 @@ public class FightMode {
                 break;
             }
             if (enemy instanceof Monster) {
-                enemyDamage = enemyDamage + new Random().nextInt(20) / 100 * enemyDamage;
+                enemyDamage = enemyDamage + new Random().nextInt(21) / 100 * enemyDamage;
             }
             hero.recieveDamage(enemyDamage - heroDef);
         }

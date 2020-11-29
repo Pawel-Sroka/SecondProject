@@ -2,42 +2,47 @@ package com.sda.model.inventory;
 
 public class Armor extends ArmorPart{
 
-    private ArmorPart leftArm;
     private ArmorPart head;
-    private ArmorPart rightArm;
     private ArmorPart torso;
+    private ArmorPart leftArm;
+    private ArmorPart rightArm;
     private ArmorPart leftLeg;
-    private ArmorPart rightLeg;
+    private ArmorPart rigthLeg;
 
-    public Armor(String name, double weight, int count, int damageResist, String bodyParts) {
+
+    public Armor(String name, double weight, int count, int damageResist, BodyParts bodyParts) {
         super(name, weight, count, damageResist, bodyParts);
     }
     public ArmorPart wearPart(ArmorPart toWear){
         ArmorPart toReturn = null;
         switch (toWear.getBodyParts()){
-            case "head":
+            case HEAD:
                 toReturn = this.head;
                 this.head = toWear;
                 break;
-            case "leftArm":
+            case TORSO:
+                toReturn = this.torso;
+                this.torso = toWear;
+                break;
+            case LEFT_ARM:
                 toReturn = this.leftArm;
                 this.leftArm = toWear;
                 break;
-            case "rightArm":
+            case RIGHT_ARM:
                 toReturn = this.rightArm;
                 this.rightArm = toWear;
+                break;
+            case LEFT_LEG:
+                toReturn = this.leftLeg;
+                this.leftLeg = toWear;
+                break;
+            case RIGHT_LEG:
+                toReturn = this.rigthLeg;
+                this.rigthLeg = toWear;
                 break;
             //.....
         }
         return toReturn;
-    }
-
-    public ArmorPart getLeftHand() {
-        return leftArm;
-    }
-
-    public void setLeftHand(ArmorPart leftHand) {
-        this.leftArm = leftHand;
     }
 
     public ArmorPart getHead() {
@@ -48,20 +53,28 @@ public class Armor extends ArmorPart{
         this.head = head;
     }
 
-    public ArmorPart getRightArm() {
-        return rightArm;
-    }
-
-    public void setRightArm(ArmorPart rightArm) {
-        this.rightArm = rightArm;
-    }
-
     public ArmorPart getTorso() {
         return torso;
     }
 
     public void setTorso(ArmorPart torso) {
         this.torso = torso;
+    }
+
+    public ArmorPart getLeftArm() {
+        return leftArm;
+    }
+
+    public void setLeftArm(ArmorPart leftArm) {
+        this.leftArm = leftArm;
+    }
+
+    public ArmorPart getRightArm() {
+        return rightArm;
+    }
+
+    public void setRightArm(ArmorPart rightArm) {
+        this.rightArm = rightArm;
     }
 
     public ArmorPart getLeftLeg() {
@@ -72,11 +85,11 @@ public class Armor extends ArmorPart{
         this.leftLeg = leftLeg;
     }
 
-    public ArmorPart getRightLeg() {
-        return rightLeg;
+    public ArmorPart getRigthLeg() {
+        return rigthLeg;
     }
 
-    public void setRightLeg(ArmorPart rightLeg) {
-        this.rightLeg = rightLeg;
+    public void setRigthLeg(ArmorPart rigthLeg) {
+        this.rigthLeg = rigthLeg;
     }
 }

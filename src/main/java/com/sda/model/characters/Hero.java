@@ -7,15 +7,15 @@ public class Hero implements Vunerable{
     public static final double MAX_WEIGHT_LIMIT = 100;
     public static final int MAX_HEALTH = 100;
     private String name;
-    private String race;
+    private Race race;
     private int currentHealth;
     private boolean overloaded;
     private InventoryObject inventory[] = new InventoryObject[10];
 
-    public Hero(String name, String race) {
+    public Hero(String name, Race race) {
         this.name = name;
         this.race = race;
-        this.currentHealth = MAX_HEALTH;
+        this.currentHealth = race.getRaceHitPoints();
     }
 
     public String getName() {
@@ -26,11 +26,11 @@ public class Hero implements Vunerable{
         this.name = name;
     }
 
-    public String getRace() {
+    public Race getRace() {
         return race;
     }
 
-    public void setRace(String race) {
+    public void setRace(Race race) {
         this.race = race;
     }
 
