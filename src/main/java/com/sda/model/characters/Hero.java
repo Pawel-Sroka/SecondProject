@@ -1,5 +1,6 @@
 package com.sda.model.characters;
 
+import com.sda.model.exceptions.GameOverException;
 import com.sda.model.exceptions.InvalidTypeException;
 import com.sda.model.exceptions.NoEmptySlotException;
 import com.sda.model.inventory.Food;
@@ -62,10 +63,10 @@ public class Hero implements Vunerable{
     }
 
     @Override
-    public void recieveDamage(int points) {
+    public void recieveDamage(int points) throws GameOverException {
         this.currentHealth -= points;
         if (this.currentHealth <= 0) {
-            System.out.println("dead");
+            throw new GameOverException();
         }
 
     }
