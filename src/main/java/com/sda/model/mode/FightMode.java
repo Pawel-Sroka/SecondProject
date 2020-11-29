@@ -45,7 +45,7 @@ public class FightMode {
         }
         while (hero.getCurrentHealth() > 0);
         if (hero.getCurrentHealth() <= 0) {
-            throw new GameOverException("U R Dead \nGame Over");
+            throw new GameOverException();
         }
 
 

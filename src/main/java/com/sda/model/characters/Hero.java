@@ -102,7 +102,7 @@ public class Hero implements Vunerable{
             }
         }
         if (!added) {
-            throw new NoEmptySlotException("no more room for items");
+            throw new NoEmptySlotException();
         } else {
             updateOverload();
         }
