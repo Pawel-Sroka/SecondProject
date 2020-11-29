@@ -65,11 +65,14 @@ public class Hero implements Vunerable{
     @Override
     public void recieveDamage(int points) throws GameOverException {
         this.currentHealth -= points;
+
         if (this.currentHealth <= 0) {
             throw new GameOverException();
         }
 
     }
+
+
 
     public void eatFood(int slot) throws InvalidTypeException {
         if (inventory[slot] instanceof Food) {

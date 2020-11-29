@@ -18,10 +18,10 @@ public class FightMode {
     public void fight() throws GameOverException, NoEmptySlotException {
 
         int heroDamage = 11;
-        int heroDef = 0;
+
         if (hero instanceof Warior) {
             heroDamage = ((Warior) hero).getWeapon().getDamagePoints();
-            heroDef = ((Warior) hero).getArmor().getDamageResist();
+
         }
 
         int enemyDamage = enemy.getDamage();
@@ -41,7 +41,7 @@ public class FightMode {
             if (enemy instanceof Monster) {
                 enemyDamage = enemyDamage + (new Random().nextInt(21) / 100) * enemyDamage;
             }
-            hero.recieveDamage(enemyDamage - heroDef);
+            hero.recieveDamage(enemyDamage);
         }
         while (hero.getCurrentHealth() > 0);
         if (hero.getCurrentHealth() <= 0) {

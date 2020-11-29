@@ -44,6 +44,14 @@ public class Armor extends ArmorPart{
         }
         return toReturn;
     }
+    public int damageResistanceSummary(){
+        return head.getDamageResist()
+                + torso.getDamageResist()
+                + leftLeg.getDamageResist()
+                + leftArm.getDamageResist()
+                + rightArm.getDamageResist()
+                + rigthLeg.getDamageResist();
+    }
 
     public ArmorPart getHead() {
         return head;

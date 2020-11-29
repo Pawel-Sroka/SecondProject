@@ -1,5 +1,6 @@
 package com.sda.model.characters;
 
+import com.sda.model.exceptions.GameOverException;
 import com.sda.model.exceptions.InvalidTypeException;
 import com.sda.model.exceptions.NoEmptySlotException;
 import com.sda.model.inventory.Armor;
@@ -49,8 +50,18 @@ public class Warior extends Hero {
         } else {
             throw new InvalidTypeException("it's not a armor");
         }
+
     }
 
+    @Override
+    public void recieveDamage(int points) throws GameOverException {
+        int damageResistance = this.armor.damageResistanceSummary();
+        if (damageResistance<points) {
+            super.recieveDamage(points-damageResistance);
+        }else {
+            System.out.println("no damage ");
+        }
+    }
 }
 
 
