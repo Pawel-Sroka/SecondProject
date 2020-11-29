@@ -8,7 +8,7 @@ public class Warior extends Hero {
     private Weapon weapon;
     private Armor armor;
 
-    public Warior(String name, String race) {
+    public Warior(String name, Race race) {
         super(name, race);
     }
 
