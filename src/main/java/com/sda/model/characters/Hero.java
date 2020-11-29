@@ -1,0 +1,120 @@
+package com.sda.model.characters;
+
+import com.sda.model.inventory.Food;
+import com.sda.model.inventory.InventoryObject;
+
+public class Hero implements Vunerable{
+    public static final double MAX_WEIGHT_LIMIT = 100;
+    public static final int MAX_HEALTH = 100;
+    private String name;
+    private String race;
+    private int currentHealth;
+    private boolean overloaded;
+    private InventoryObject inventory[] = new InventoryObject[10];
+
+    public Hero(String name, String race) {
+        this.name = name;
+        this.race = race;
+        this.currentHealth = MAX_HEALTH;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRace() {
+        return race;
+    }
+
+    public void setRace(String race) {
+        this.race = race;
+    }
+
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+    }
+
+    public boolean isOverloaded() {
+        return overloaded;
+    }
+
+    public void setOverloaded(boolean overloaded) {
+        this.overloaded = overloaded;
+    }
+
+    public void showInventory() {
+        for (InventoryObject i : inventory) {
+
+            if (i!=null){
+                System.out.println(i);
+            }
+        }
+    }
+
+    @Override
+    public void recieveDamage(int points) {
+        this.currentHealth -= points;
+        if (this.currentHealth <= 0) {
+            System.out.println("dead");
+        }
+
+    }
+
+    public void eatFood(int slot) {
+        if (inventory[slot] instanceof Food) {
+            Food toEat = (Food) inventory[slot];
+            int sum = this.currentHealth + toEat.getHealthPointsRegeneration();
+            this.currentHealth += Math.min(sum, MAX_HEALTH);
+            if (toEat.getCount() > 1) {
+                toEat.setCount(toEat.getCount() - 1);
+            } else {
+                inventory[slot] = null;
+            }
+        } else System.out.println("it's not food");
+
+
+    }
+
+    public void addToInventory(InventoryObject toAdd) {
+        boolean added = false;
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i] != null && inventory[i].equals(toAdd)) {
+                inventory[i].setCount(inventory[i].getCount() + 1);
+                added = true;
+                break;
+            } else if (inventory[i] == null) {
+                inventory[i] = toAdd;
+                added = true;
+                break;
+            }
+        }
+        if (!added) {
+            System.out.println("cannot add an item");
+        } else {
+            updateOverload();
+        }
+    }
+
+    private void updateOverload() {
+        double sum = 0;
+        for (InventoryObject i : inventory) {
+            if (i != null) {
+                sum += i.getWeight() * i.getCount();
+            }
+        }
+        this.overloaded = sum > MAX_WEIGHT_LIMIT;
+    }
+
+    public InventoryObject[] getInventory() {
+        return inventory;
+    }
+}
+
