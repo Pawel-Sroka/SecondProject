@@ -13,7 +13,6 @@ public class FightMode {
         this.hero = hero;
         this.enemy = enemy;
     }
-
     public void fight() {
 
         int heroDamage = 11;
