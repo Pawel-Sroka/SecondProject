@@ -27,6 +27,7 @@ public class TradeMode {
             if (customer.getMoney() >= trader.getStock().get(itemName).getPrice()) {
                 customer.addToInventory(toBuy);
                 customer.setMoney(customer.getMoney()-trader.getStock().get(itemName).getPrice());
+                trader.getStock().remove(itemName);
             } else System.out.println("not enought money");
         }
     }
