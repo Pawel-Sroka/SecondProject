@@ -3,7 +3,6 @@ package com.sda.model.characters;
 import com.sda.model.exceptions.GameOverException;
 import com.sda.model.magic.Spell;
 
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -11,8 +10,8 @@ public class Sorcerer extends Hero {
     private int magicResistant;
     private Set<Spell> spell = new TreeSet<>();
 
-    public Sorcerer(String name, Race race) {
-        super(name, race);
+    public Sorcerer(String name, Race race, int money) {
+        super(name, race, money);
         setDamage(getDamage()*2) ;
     }
 

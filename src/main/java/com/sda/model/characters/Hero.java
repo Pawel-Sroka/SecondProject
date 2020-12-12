@@ -13,13 +13,23 @@ public class Hero implements Vunerable {
     private String name;
     private Race race;
     private int currentHealth;
+    private int money;
     private boolean overloaded;
     private InventoryObject inventory[] = new InventoryObject[10];
 
-    public Hero(String name, Race race) {
+    public Hero(String name, Race race, int money) {
         this.name = name;
         this.race = race;
         this.currentHealth = maxHealth = race.getRaceHitPoints();
+        this.money = money;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
     }
 
     public int getDamage() {
