@@ -56,9 +56,9 @@ public class Warior extends Hero {
     @Override
     public void recieveDamage(int points) throws GameOverException {
         int damageResistance = this.armor.damageResistanceSummary();
-        if (damageResistance<points) {
-            super.recieveDamage(points-damageResistance);
-        }else {
+        if (damageResistance < points) {
+            super.recieveDamage(points - damageResistance);
+        } else {
             System.out.println("no damage ");
         }
     }
