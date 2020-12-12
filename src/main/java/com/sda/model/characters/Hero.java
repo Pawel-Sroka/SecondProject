@@ -6,6 +6,9 @@ import com.sda.model.exceptions.NoEmptySlotException;
 import com.sda.model.inventory.Food;
 import com.sda.model.inventory.InventoryObject;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Hero implements Vunerable {
     public static final double MAX_WEIGHT_LIMIT = 100;
     public final int maxHealth;
@@ -73,12 +76,16 @@ public class Hero implements Vunerable {
     }
 
     public void showInventory() {
-        for (InventoryObject i : inventory) {
+        Arrays.stream(inventory)
+                .filter(x-> x != null)
+                .forEach(a-> System.out.println(a));
 
-            if (i != null) {
-                System.out.println(i);
-            }
-        }
+//        for (InventoryObject i : inventory) {
+//
+//            if (i != null) {
+//                System.out.println(i);
+//            }
+//        }
     }
 
     @Override
@@ -131,12 +138,16 @@ public class Hero implements Vunerable {
     }
 
     private void updateOverload() {
-        double sum = 0;
-        for (InventoryObject i : inventory) {
-            if (i != null) {
-                sum += i.getWeight() * i.getCount();
-            }
-        }
+        double sum = Arrays.stream(inventory)
+                .filter(Objects::nonNull)
+                .map(i->i.getCount()*i.getWeight())
+                .reduce(0d,(a, b) ->a+b);
+                //       double sum = 0;
+//        for (InventoryObject i : inventory) {
+//            if (i != null) {
+//                sum += i.getWeight() * i.getCount();
+//            }
+//        }
         this.overloaded = sum > MAX_WEIGHT_LIMIT;
     }
 
