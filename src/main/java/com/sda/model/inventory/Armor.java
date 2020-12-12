@@ -3,22 +3,27 @@ package com.sda.model.inventory;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Armor extends ArmorPart{
+public class Armor extends ArmorPart {
 
-//    private ArmorPart head;
+    //    private ArmorPart head;
 //    private ArmorPart torso;
 //    private ArmorPart leftArm;
 //    private ArmorPart rightArm;
 //    private ArmorPart leftLeg;
 //    private ArmorPart rigthLeg;
-    private Map<BodyParts,ArmorPart> parts = new HashMap<>();
+    private Map<BodyParts, ArmorPart> parts = new HashMap<>();
 
 
     public Armor(String name, double weight, int count, int damageResist, BodyParts bodyParts) {
         super(name, weight, count, damageResist, bodyParts);
     }
 
-//    public ArmorPart wearPart(ArmorPart toWear){
+    public ArmorPart wearPart(ArmorPart toWear) {
+        if (toWear != null) {
+            ArmorPart toReturn = parts.get(toWear.getBodyParts());
+            parts.put(toWear.getBodyParts(),toWear);
+            return toReturn;
+        }return null;
 //        ArmorPart toReturn = null;
 //        switch (toWear.getBodyParts()){
 //            case HEAD:
@@ -48,14 +53,20 @@ public class Armor extends ArmorPart{
 //
 //        }
 //        return toReturn;
-//    }
+    }
 
 
-    public int damageResistanceSummary(){
-        int resistSummary=0;
-        for (BodyParts i : parts.keySet()){
-            resistSummary+=parts.get(i).getDamageResist();
-        }return resistSummary;
+    public int damageResistanceSummary() {
+        int resistSummary = 0;
+        //przechodzimy po kluczach
+//        for (BodyParts i : parts.keySet()) {
+//            resistSummary += parts.get(i).getDamageResist();
+//        }
+        //lub przechodzimy po wartościach:
+        for (ArmorPart p : parts.values()){
+            resistSummary+=p.getDamageResist();
+        }
+        return resistSummary;
         //old body:
 //        return head.getDamageResist()
 //                + torso.getDamageResist()
@@ -65,6 +76,13 @@ public class Armor extends ArmorPart{
 //                + rigthLeg.getDamageResist();
     }
 
+    public Map<BodyParts, ArmorPart> getParts() {
+        return parts;
+    }
+
+    public void setParts(Map<BodyParts, ArmorPart> parts) {
+        this.parts = parts;
+    }
 // old set/get:
 //    public ArmorPart getHead() {
 //        return head;
