@@ -44,7 +44,7 @@ public class HeroRepository {
         warior1.setDamage(12);
         warior1.addToInventory(new ArmorPart("chain mail", 5, 1, 10, BodyParts.TORSO));
         warior1.addToInventory(new Weapon("short sword", 2, 1, 15));
-        warior1.getWeapon();
+        warior1.wearWeapon(0);
         heroes.put("Ghul wojownik", warior1);
 
         Warior warior2 = new Warior("Karl", Race.MUTANT);

@@ -1,10 +1,13 @@
 package com.sda.serwice;
 
+import com.sda.exceptions.GameOverException;
 import com.sda.model.characters.Enemy;
 import com.sda.model.characters.Hero;
 import com.sda.model.characters.Raider;
 import com.sda.model.inventory.Weapon;
 import com.sda.repository.HeroRepository;
+
+import java.util.Scanner;
 
 public class Game {
     private static char map[][];
@@ -12,21 +15,72 @@ public class Game {
     private static Positions finishPos;
     private static Hero hero;
     private static int enemyKilled = 0;
+    private static char oldField = '_';
 
     public static void main(String[] args) {
 
         init();
+        while (!heroPos.equals(finishPos)){
+            showMap();
+            String sc = new Scanner(System.in).nextLine();
+            switch (sc.toUpperCase()){
+                case "HELP" :
+                    showHints();
+                    break;
+                case "W" :
+                case "S" :
+                case "A" :
+                case "D" :
+                    move(sc.toUpperCase());
+                    break;
 
-
+                default:
+                    System.out.println("unknow command");
+            }
+//            try {
+//                if (oldField == '~'){
+//                    hero.recieveDamage(5);
+//                    System.out.println("rzeka hp-5");
+//                }
+//                if (oldField == '.'){
+//                    hero.recieveDamage(1);
+//                    System.out.println("bagno hp-1");
+//                }
+//            }catch (GameOverException e){
+//                System.out.println("game over");
+//            }
+        }
     }
     private static void init(){
+
         map = FileService.mapLoad();
         heroPos = findChar('H');
         finishPos = findChar('F');
-
         HeroRepository heroRepository = new HeroRepository();
         hero = heroRepository.getHeroes().get("Karl");
         showHints();
+
+    }
+    private static void move(String move){
+
+        map[heroPos.getY()][heroPos.getX()] = oldField;
+
+        if (move.equals("W")&&heroPos.getY()-1>=0){
+            heroPos.setY(-1);
+        }
+        if (move.equals("S")&&heroPos.getY()+1<map.length ){
+            heroPos.setY(1);
+        }
+        if (move.equals("A")&&heroPos.getX()-1>=0){
+            heroPos.setX(-1);
+        }
+        if (move.equals("D")&&heroPos.getX()+1<map[0].length){
+            heroPos.setX(1);
+        }
+        oldField = map[heroPos.getY()][heroPos.getX()];
+        map[heroPos.getY()][heroPos.getX()]='H';
+        System.out.println("go to x: " + heroPos.getX() +" y: "+ heroPos.getY());
+        System.out.println(" x mapy "+map[0].length+" y mapy "+ map.length);
     }
 
     private static Enemy getDefoultEnemy(){
@@ -34,6 +88,16 @@ public class Game {
         enemy.setWeapon(new Weapon("miecz",2,1,20));
         return enemy;
     }
+
+    private static void showMap(){
+        for (int i = 0; i < map.length; i++) {
+            System.out.println();
+            for (int j = 0; j < map[i].length; j++) {
+                System.out.print(String.valueOf(map[i][j]));
+                }
+            }
+        }
+
 
     public static void showHints(){
         System.out.println("to move :");
@@ -48,10 +112,10 @@ public class Game {
     }
 
     private static Positions findChar(char toFind){
-        for (int y = 0; y < map.length; y++) {
-            for (int x = 0; x < map[y].length; x++) {
-                if (map[y][x]==toFind){
-                    return new Positions(x,y);
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                if (map[i][j]==toFind){
+                    return new Positions(j,i);
                 }
             }
         }
