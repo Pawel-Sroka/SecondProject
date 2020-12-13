@@ -1,7 +1,11 @@
-package com.sda.model.characters;
+package com.sda.repository;
 
 import com.sda.exceptions.InvalidTypeException;
 import com.sda.exceptions.NoEmptySlotException;
+import com.sda.model.characters.Hero;
+import com.sda.model.characters.Race;
+import com.sda.model.characters.Sorcerer;
+import com.sda.model.characters.Warior;
 import com.sda.model.inventory.ArmorPart;
 import com.sda.model.inventory.BodyParts;
 import com.sda.model.inventory.Food;
@@ -14,7 +18,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class HeroRepository {
-    private Map<String,Hero> heroes = new HashMap<>();
+    private Map<String, Hero> heroes = new HashMap<>();
 
     public HeroRepository() {
         try {
@@ -25,7 +29,7 @@ public class HeroRepository {
     }
 
     private void preparedData() throws NoEmptySlotException, InvalidTypeException {
-        Sorcerer sorc1 = new Sorcerer("Merlin",Race.HUMAN);
+        Sorcerer sorc1 = new Sorcerer("Merlin", Race.HUMAN);
         sorc1.setDamage(15);
         sorc1.addToInventory(new ArmorPart("tiara",0.3,1,5, BodyParts.HEAD));
         sorc1.addSpell(new Spell("fireball",15,0,0));
