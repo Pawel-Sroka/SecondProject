@@ -1,16 +1,15 @@
-package com.sda.model.characters;
+package com.sda.model.mode;
 
-import com.sda.model.inventory.InventoryObject;
-import com.sda.model.inventory.Price;
+import com.sda.model.inventory.PricedItem;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Trader {
     String name;
-    private Map<String, Price> stock = new HashMap<>();
+    private Map<String, PricedItem> stock = new HashMap<>();
 
-    public Trader(String name, Map<String, Price> stock) {
+    public Trader(String name, Map<String, PricedItem> stock) {
         this.name = name;
         this.stock = stock;
     }
@@ -25,7 +24,7 @@ public class Trader {
         return name;
     }
 
-    public Map<String, Price> getStock() {
+    public Map<String, PricedItem> getStock() {
         return stock;
     }
 }
