@@ -10,8 +10,8 @@ public class Sorcerer extends Hero {
     private int magicResistant;
     private Set<Spell> spell = new TreeSet<>();
 
-    public Sorcerer(String name, Race race, int money) {
-        super(name, race, money);
+    public Sorcerer(String name, Race race) {
+        super(name, race);
         setDamage(getDamage()*2) ;
     }
 

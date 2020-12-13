@@ -11,4 +11,9 @@ public enum Race {
     public int getRaceHitPoints() {
         return raceHitPoints;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

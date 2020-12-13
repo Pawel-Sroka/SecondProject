@@ -16,15 +16,14 @@ public class Hero implements Vunerable {
     private String name;
     private Race race;
     private int currentHealth;
-    private int money;
+    private int money = 100;
     private boolean overloaded;
     private InventoryObject inventory[] = new InventoryObject[10];
 
-    public Hero(String name, Race race, int money) {
+    public Hero(String name, Race race) {
         this.name = name;
         this.race = race;
         this.currentHealth = maxHealth = race.getRaceHitPoints();
-        this.money = money;
     }
 
     public int getMoney() {
@@ -137,7 +136,7 @@ public class Hero implements Vunerable {
         }
     }
 
-    private void updateOverload() {
+    public double updateOverload() {
         double sum = Arrays.stream(inventory)
                 .filter(Objects::nonNull)
                 .map(i->i.getCount()*i.getWeight())
@@ -149,6 +148,7 @@ public class Hero implements Vunerable {
 //            }
 //        }
         this.overloaded = sum > MAX_WEIGHT_LIMIT;
+        return sum;
     }
 
     public InventoryObject[] getInventory() {
