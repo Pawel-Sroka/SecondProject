@@ -1,7 +1,7 @@
-package com.sda.model.mode;
+package com.sda.mode;
 
 import com.sda.model.characters.Hero;
-import com.sda.model.exceptions.NoEmptySlotException;
+import com.sda.exceptions.NoEmptySlotException;
 import com.sda.model.inventory.PricedItem;
 import com.sda.model.inventory.Weapon;
 

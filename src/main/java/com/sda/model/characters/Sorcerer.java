@@ -1,6 +1,6 @@
 package com.sda.model.characters;
 
-import com.sda.model.exceptions.GameOverException;
+import com.sda.exceptions.GameOverException;
 import com.sda.model.magic.Spell;
 
 import java.util.Set;

@@ -1,4 +1,4 @@
-package com.sda.model.exceptions;
+package com.sda.exceptions;
 
 public class NoEmptySlotException extends Exception{
     public NoEmptySlotException() {

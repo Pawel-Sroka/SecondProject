@@ -1,7 +1,7 @@
 package com.sda.model.characters;
 
-import com.sda.model.exceptions.InvalidTypeException;
-import com.sda.model.exceptions.NoEmptySlotException;
+import com.sda.exceptions.InvalidTypeException;
+import com.sda.exceptions.NoEmptySlotException;
 import com.sda.model.inventory.ArmorPart;
 import com.sda.model.inventory.BodyParts;
 import com.sda.model.inventory.Food;

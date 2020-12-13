@@ -1,4 +1,4 @@
-package com.sda.model.exceptions;
+package com.sda.exceptions;
 
 public class GameOverException extends Exception{
     public GameOverException() {

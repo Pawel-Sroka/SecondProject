@@ -1,8 +1,8 @@
-package com.sda.model.mode;
+package com.sda.mode;
 
 import com.sda.model.characters.*;
-import com.sda.model.exceptions.GameOverException;
-import com.sda.model.exceptions.NoEmptySlotException;
+import com.sda.exceptions.GameOverException;
+import com.sda.exceptions.NoEmptySlotException;
 import com.sda.model.inventory.Weapon;
 
 import java.util.Random;
