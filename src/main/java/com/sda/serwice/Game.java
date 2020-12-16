@@ -63,7 +63,10 @@ public class Game {
         finishPos = findChar('F');
 
         HeroRepository heroRepository = new HeroRepository();
-        hero = heroRepository.getHeroes().get("wsiok");
+        heroRepository.showHeroes();
+        System.out.println("write hero name: ");
+        String name = new Scanner(System.in).nextLine();
+        hero = heroRepository.getHeroes().get(name);
 
         showHints();
 

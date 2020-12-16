@@ -93,6 +93,12 @@ public class HeroRepository {
         heroes.put("Gandalf", sorcerer);
     }
 
+    public void showHeroes(){
+        sortByName("a");
+        for (String i:heroes.keySet()){
+            System.out.println(i);
+        }
+    }
     public List<Hero> sortByName(String name) {
         return heroes.values().stream()
                 .filter(n -> n.getName().contains(name))
