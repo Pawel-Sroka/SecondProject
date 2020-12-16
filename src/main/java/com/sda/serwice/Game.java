@@ -17,10 +17,11 @@ public class Game {
     private static int enemyKilled = 0;
     private static char oldField = '_';
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
 
         init();
         while (!heroPos.equals(finishPos)){
+
             showMap();
             String sc = new Scanner(System.in).nextLine();
             switch (sc.toUpperCase()){
@@ -37,27 +38,33 @@ public class Game {
                 default:
                     System.out.println("unknow command");
             }
-//            try {
-//                if (oldField == '~'){
-//                    hero.recieveDamage(5);
-//                    System.out.println("rzeka hp-5");
-//                }
-//                if (oldField == '.'){
-//                    hero.recieveDamage(1);
-//                    System.out.println("bagno hp-1");
-//                }
-//            }catch (GameOverException e){
-//                System.out.println("game over");
-//            }
+            try {
+                if (oldField == '~'){
+                    hero.recieveDamage(5);
+                    System.out.println("rzeka hp-5");
+                }
+                if (oldField == '.'){
+                    hero.recieveDamage(1);
+                    System.out.println("bagno hp-1");
+                }
+            }catch (GameOverException e){
+                System.out.println("game over");
+            }
+
+            System.out.println("hero: " + hero.getName() + " a " + hero.getRace());
+            System.out.println("hp: " + hero.getCurrentHealth() + " att: "+ hero.getDamage());
         }
     }
+
     private static void init(){
 
         map = FileService.mapLoad();
         heroPos = findChar('H');
         finishPos = findChar('F');
+
         HeroRepository heroRepository = new HeroRepository();
-        hero = heroRepository.getHeroes().get("Karl");
+        hero = heroRepository.getHeroes().get("wsiok");
+
         showHints();
 
     }
@@ -77,10 +84,11 @@ public class Game {
         if (move.equals("D")&&heroPos.getX()+1<map[0].length){
             heroPos.setX(1);
         }
+
         oldField = map[heroPos.getY()][heroPos.getX()];
         map[heroPos.getY()][heroPos.getX()]='H';
-        System.out.println("go to x: " + heroPos.getX() +" y: "+ heroPos.getY());
-        System.out.println(" x mapy "+map[0].length+" y mapy "+ map.length);
+        // used to help set up field cooperation
+        //System.out.println("go to x: " + heroPos.getX() +" y: "+ heroPos.getY());
     }
 
     private static Enemy getDefoultEnemy(){
@@ -93,22 +101,25 @@ public class Game {
         for (int i = 0; i < map.length; i++) {
             System.out.println();
             for (int j = 0; j < map[i].length; j++) {
-                System.out.print(String.valueOf(map[i][j]));
+                System.out.print(map[i][j]);
                 }
             }
         }
 
 
     public static void showHints(){
+        Scanner sc = new Scanner(System.in);
         System.out.println("to move :");
         System.out.println("W - up");
         System.out.println("S - down");
         System.out.println("A - left");
         System.out.println("D - right");
-        System.out.println("type: inventory - to see inventory");
+        System.out.println("type:\n inventory - to see inventory");
         System.out.println("eat - to eat");
         System.out.println("weapon - to wear a weapon");
         System.out.println("help - to show this hints");
+        System.out.println("press enter to continue");
+        sc.nextLine();
     }
 
     private static Positions findChar(char toFind){

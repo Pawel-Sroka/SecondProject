@@ -44,7 +44,7 @@ public class HeroRepository {
         warior1.setDamage(12);
         warior1.addToInventory(new ArmorPart("chain mail", 5, 1, 10, BodyParts.TORSO));
         warior1.addToInventory(new Weapon("short sword", 2, 1, 15));
-        warior1.wearWeapon(0);
+        warior1.wearWeapon(1);
         heroes.put("Ghul wojownik", warior1);
 
         Warior warior2 = new Warior("Karl", Race.MUTANT);
@@ -52,6 +52,7 @@ public class HeroRepository {
         warior2.addToInventory(new ArmorPart("Rusty helmet", 1, 1, 5, BodyParts.HEAD));
         warior2.addToInventory(new ArmorPart("Worn boot", 1, 1, 2, BodyParts.RIGHT_LEG));
         warior2.addToInventory(new Weapon("Rusty sword", 2, 1, 5));
+        warior2.wearWeapon(2);
         heroes.put("Mutant wojownik", warior2);
 
         Hero peasant = new Hero("Glut", Race.HUMAN);
@@ -77,7 +78,6 @@ public class HeroRepository {
         warrior.addToInventory(new Weapon("Sword", 1, 1, 70));
         warrior.wearWeapon(0);
         warrior.addToInventory(new ArmorPart("Torso Armor", 1, 1, 50, BodyParts.TORSO));
-        warrior.wearArmor(0);
         heroes.put("Geralt", warrior);
 
         Warior warrior2 = new Warior("Ksiaze Mroku", Race.GHOUL);
@@ -85,7 +85,7 @@ public class HeroRepository {
         warrior2.addToInventory(new Weapon("Sword", 1, 1, 70));
         warrior2.wearWeapon(0);
         warrior2.addToInventory(new ArmorPart("Right Arm Armor", 0.5, 1, 20, BodyParts.RIGHT_ARM));
-        warrior2.wearArmor(0);
+        //warrior2.wearArmor(0);
         heroes.put("Ksiaze Mroku", warrior);
 
         Sorcerer sorcerer = new Sorcerer("Gandalf", Race.MUTANT);
