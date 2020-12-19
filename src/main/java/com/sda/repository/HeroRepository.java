@@ -86,9 +86,7 @@ public class HeroRepository {
         warrior2.wearWeapon(0);
         warrior2.addToInventory(new ArmorPart("Right Arm Armor", 0.5, 1, 20, BodyParts.RIGHT_ARM));
         //warrior2.wearArmor(0);
-
-
-        heroes.put("Ksiaze Mroku", warrior);
+        heroes.put("Ksiaze Mroku", warrior2);
 
         Sorcerer sorcerer = new Sorcerer("Gandalf", Race.MUTANT);
         sorcerer.addSpell(new Spell("Blabla", 10, 10, 10));

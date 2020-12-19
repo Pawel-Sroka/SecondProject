@@ -46,7 +46,7 @@ public class Warior extends Hero {
         if (super.getInventory()[slot] instanceof ArmorPart) {
             ArmorPart toWear = (ArmorPart) super.getInventory()[slot];
             super.getInventory()[slot] = null;
-            super.addToInventory(this.armor.wearPart(toWear));
+            super.addToInventory(this.armor.wearPart(toWear)); // tu coś nie działa
         } else {
             throw new InvalidTypeException("it's not a armor");
         }
