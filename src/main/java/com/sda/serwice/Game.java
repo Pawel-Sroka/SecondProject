@@ -1,10 +1,15 @@
 package com.sda.serwice;
 
 import com.sda.exceptions.GameOverException;
-import com.sda.model.characters.Enemy;
-import com.sda.model.characters.Hero;
-import com.sda.model.characters.Raider;
+import com.sda.exceptions.InvalidTypeException;
+import com.sda.exceptions.NoEmptySlotException;
+import com.sda.mode.FightMode;
+import com.sda.model.characters.*;
+import com.sda.model.inventory.Armor;
+import com.sda.model.inventory.Food;
+import com.sda.model.inventory.InventoryObject;
 import com.sda.model.inventory.Weapon;
+import com.sda.model.magic.Spell;
 import com.sda.repository.HeroRepository;
 
 import java.util.Scanner;
@@ -17,46 +22,86 @@ public class Game {
     private static int enemyKilled = 0;
     private static char oldField = '_';
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws InvalidTypeException {
 
         init();
-        while (!heroPos.equals(finishPos)){
+        while (!heroPos.equals(finishPos)) {
 
             showMap();
-            String sc = new Scanner(System.in).nextLine();
-            switch (sc.toUpperCase()){
-                case "HELP" :
+            String sc = new Scanner(System.in).nextLine().toUpperCase();
+            switch (sc) {
+                case "HELP":
                     showHints();
                     break;
-                case "W" :
-                case "S" :
-                case "A" :
-                case "D" :
-                    move(sc.toUpperCase());
+                case "W":
+                case "S":
+                case "A":
+                case "D":
+                    move(sc);
+                    break;
+                case "INVENTORY":
+                    hero.showInventory();
+                    break;
+                case "EAT":
+                    eat();
+                    break;
+                case "WEAPON":
+                    if (hero instanceof Warior){
+                        ((Warior) hero).getWeapon();
+                    }
                     break;
 
                 default:
                     System.out.println("unknow command");
             }
             try {
-                if (oldField == '~'){
+                if (oldField == '~') {
                     hero.recieveDamage(5);
                     System.out.println("rzeka hp-5");
                 }
-                if (oldField == '.'){
+                if (oldField == '.') {
                     hero.recieveDamage(1);
                     System.out.println("bagno hp-1");
                 }
-            }catch (GameOverException e){
+                if (oldField == 'E') {
+                    FightMode fighting = new FightMode(hero, getDefoultEnemy());
+                    fighting.fight();
+                    enemyKilled += 1;
+                    oldField = 'X';
+                }
+                if (oldField == '?'){
+                    InventoryObject chestItem = null;
+                    if (hero instanceof Warior) {
+                        chestItem = new Weapon("Excalibur", 1,1,40);
+
+                    }
+                    else {
+                        chestItem = new Food("chleb", 0.5, 1, 10);
+                    }
+                    hero.addToInventory(chestItem);
+
+                    oldField = ']';
+                }
+
+            } catch (GameOverException | NoEmptySlotException e) {
                 System.out.println("game over");
+                break;
             }
 
             System.out.println("hero: " + hero.getName() + " a " + hero.getRace());
-            System.out.println("hp: " + hero.getCurrentHealth() + " att: "+ hero.getDamage());
+            System.out.println("hp: " + hero.getCurrentHealth() + " att: " + hero.getDamage());
+            System.out.println("enemy killed: " + enemyKilled);
         }
+        System.out.println("you got to last location! Congratulations!");
     }
 
-    private static void init(){
+    private static void eat() throws InvalidTypeException {
+
+        System.out.println("podaj numer slotu z jedzeniem: ");
+        int slotNr =new Scanner(System.in).nextInt();
+        hero.eatFood(slotNr);
+}
+    private static void init() {
 
         map = FileService.mapLoad();
         heroPos = findChar('H');
@@ -71,46 +116,46 @@ public class Game {
         showHints();
 
     }
-    private static void move(String move){
+
+    private static void move(String move) {
 
         map[heroPos.getY()][heroPos.getX()] = oldField;
 
-        if (move.equals("W")&&heroPos.getY()-1>=0){
+        if (move.equals("W") && heroPos.getY() - 1 >= 0) {
             heroPos.setY(-1);
         }
-        if (move.equals("S")&&heroPos.getY()+1<map.length ){
+        if (move.equals("S") && heroPos.getY() + 1 < map.length) {
             heroPos.setY(1);
         }
-        if (move.equals("A")&&heroPos.getX()-1>=0){
+        if (move.equals("A") && heroPos.getX() - 1 >= 0) {
             heroPos.setX(-1);
         }
-        if (move.equals("D")&&heroPos.getX()+1<map[0].length){
+        if (move.equals("D") && heroPos.getX() + 1 < map[0].length) {
             heroPos.setX(1);
         }
 
         oldField = map[heroPos.getY()][heroPos.getX()];
-        map[heroPos.getY()][heroPos.getX()]='H';
+        map[heroPos.getY()][heroPos.getX()] = 'H';
         // used to help set up field cooperation
         //System.out.println("go to x: " + heroPos.getX() +" y: "+ heroPos.getY());
     }
 
-    private static Enemy getDefoultEnemy(){
-        Raider enemy = new Raider("Andrzej",60,10);
-        enemy.setWeapon(new Weapon("miecz",2,1,20));
+    private static Enemy getDefoultEnemy() {
+        Raider enemy = new Raider("Andrzej", 60, 10);
+        enemy.setWeapon(new Weapon("miecz", 2, 1, 20));
         return enemy;
     }
 
-    private static void showMap(){
+    private static void showMap() {
         for (int i = 0; i < map.length; i++) {
             System.out.println();
             for (int j = 0; j < map[i].length; j++) {
                 System.out.print(map[i][j]);
-                }
             }
         }
+    }
 
-
-    public static void showHints(){
+    public static void showHints() {
         Scanner sc = new Scanner(System.in);
         System.out.println("to move :");
         System.out.println("W - up");
@@ -125,11 +170,11 @@ public class Game {
         sc.nextLine();
     }
 
-    private static Positions findChar(char toFind){
+    private static Positions findChar(char toFind) {
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
-                if (map[i][j]==toFind){
-                    return new Positions(j,i);
+                if (map[i][j] == toFind) {
+                    return new Positions(j, i);
                 }
             }
         }

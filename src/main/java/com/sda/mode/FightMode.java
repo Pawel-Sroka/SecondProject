@@ -23,6 +23,7 @@ public class FightMode {
         if (hero instanceof Warior) {
             heroDamage = ((Warior) hero).getWeapon().getDamagePoints();
 
+
         }
 
         int enemyDamage = enemy.getDamage();
@@ -32,6 +33,7 @@ public class FightMode {
         Weapon drop = ((Raider) enemy).getWeapon();
         do {
             enemy.recieveDamage(heroDamage);
+            System.out.println(" enemy got: "+heroDamage+" dmg");
             if (enemy.getCurrentHealth() <= 0) {
                 System.out.println("enemy killed");
                 if (drop != null) {
@@ -43,8 +45,9 @@ public class FightMode {
                 enemyDamage = enemyDamage + (new Random().nextInt(21) / 100) * enemyDamage;
             }
             hero.recieveDamage(enemyDamage);
+            System.out.println(" hero got: "+enemyDamage+" dmg");
         }
-        while (hero.getCurrentHealth() > 0);
+        while (hero.getCurrentHealth() > 0 || enemy.getCurrentHealth() > 0);
         if (hero.getCurrentHealth() <= 0) {
             throw new GameOverException();
         }
