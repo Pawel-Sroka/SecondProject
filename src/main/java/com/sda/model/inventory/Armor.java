@@ -10,7 +10,7 @@ public class Armor extends ArmorPart {
 //    private ArmorPart leftArm;
 //    private ArmorPart rightArm;
 //    private ArmorPart leftLeg;
-//    private ArmorPart rigthLeg;
+//    private ArmorPart rightLeg;
     private Map<BodyParts, ArmorPart> parts = new HashMap<>();
 
 
@@ -47,8 +47,8 @@ public class Armor extends ArmorPart {
 //                this.leftLeg = toWear;
 //                break;
 //            case RIGHT_LEG:
-//                toReturn = this.rigthLeg;
-//                this.rigthLeg = toWear;
+//                toReturn = this.rightLeg;
+//                this.rightLeg = toWear;
 //                break;
 //
 //        }
@@ -73,7 +73,7 @@ public class Armor extends ArmorPart {
 //                + leftLeg.getDamageResist()
 //                + leftArm.getDamageResist()
 //                + rightArm.getDamageResist()
-//                + rigthLeg.getDamageResist();
+//                + rightLeg.getDamageResist();
     }
 
     public Map<BodyParts, ArmorPart> getParts() {
@@ -124,11 +124,11 @@ public class Armor extends ArmorPart {
 //        this.leftLeg = leftLeg;
 //    }
 //
-//    public ArmorPart getRigthLeg() {
-//        return rigthLeg;
+//    public ArmorPart getRightLeg() {
+//        return rightLeg;
 //    }
 //
-//    public void setRigthLeg(ArmorPart rigthLeg) {
-//        this.rigthLeg = rigthLeg;
+//    public void setRightLeg(ArmorPart rightLeg) {
+//        this.rightLeg = rightLeg;
 //    }
 }

@@ -29,15 +29,15 @@ public class Sorcerer extends Hero {
             this.magicResistant += toAdd.getSpellDamageResistant();
             setDamage(getDamage()+toAdd.getSpellDamage());
             setCurrentHealth(getCurrentHealth()+toAdd.getSpellHealPoints());
-        } else System.out.println("alredy got this spell!");
+        } else System.out.println("Already got this spell!");
     }
 
     @Override
-    public void recieveDamage(int points) throws GameOverException {
+    public void receiveDamage(int points) throws GameOverException {
         int damageResist = this.magicResistant;
         if (damageResist < points) {
-            super.recieveDamage(points - damageResist);
-        } else System.out.println("no damage");
+            super.receiveDamage(points - damageResist);
+        } else System.out.println("No damage");
     }
 
     public int getMagicResistant() {

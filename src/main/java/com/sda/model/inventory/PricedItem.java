@@ -15,10 +15,8 @@ public class PricedItem extends InventoryObject{
 
     @Override
     public String toString() {
-        return "Price{" +
-                "price=" + price +
-                ", item=" + item +
-                '}';
+        return "price= " + price +
+                ", item=" + item ;
     }
 
     public int getPrice() {

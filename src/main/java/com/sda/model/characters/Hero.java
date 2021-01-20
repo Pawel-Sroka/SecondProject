@@ -88,7 +88,7 @@ public class Hero implements Vunerable {
     }
 
     @Override
-    public void recieveDamage(int points) throws GameOverException {
+    public void receiveDamage(int points) throws GameOverException {
         this.currentHealth -= points;
 
         if (this.currentHealth <= 0) {
@@ -110,7 +110,7 @@ public class Hero implements Vunerable {
             }
         } else {
 
-            throw new InvalidTypeException("it's not a food");
+            throw new InvalidTypeException("It's not a food");
         }
 
 

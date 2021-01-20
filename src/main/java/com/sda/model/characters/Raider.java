@@ -1,6 +1,5 @@
 package com.sda.model.characters;
 
-import com.sda.model.inventory.Armor;
 import com.sda.model.inventory.Weapon;
 
 public class Raider extends Enemy {

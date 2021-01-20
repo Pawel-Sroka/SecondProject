@@ -4,12 +4,13 @@ import com.sda.exceptions.GameOverException;
 import com.sda.exceptions.InvalidTypeException;
 import com.sda.exceptions.NoEmptySlotException;
 import com.sda.mode.FightMode;
-import com.sda.model.characters.*;
-import com.sda.model.inventory.Armor;
+import com.sda.model.characters.Enemy;
+import com.sda.model.characters.Hero;
+import com.sda.model.characters.Raider;
+import com.sda.model.characters.Warior;
 import com.sda.model.inventory.Food;
 import com.sda.model.inventory.InventoryObject;
 import com.sda.model.inventory.Weapon;
-import com.sda.model.magic.Spell;
 import com.sda.repository.HeroRepository;
 
 import java.util.Scanner;
@@ -52,19 +53,19 @@ public class Game {
                     break;
 
                 default:
-                    System.out.println("unknow command");
+                    System.out.println("Unknow command");
             }
             try {
                 if (oldField == 'F'){
                     System.out.println("you got to last location! Congratulations!");
                                     }
                 if (oldField == '~') {
-                    hero.recieveDamage(5);
-                    System.out.println("rzeka hp-5");
+                    hero.receiveDamage(5);
+                    System.out.println("River hp-5");
                 }
                 if (oldField == '.') { // something is going wrong when Warior recive damage by this field
-                    hero.recieveDamage(1);
-                    System.out.println("bagno hp-1");
+                    hero.receiveDamage(1);
+                    System.out.println("Swamp hp-1");
                 }
                 if (oldField == 'E') {
                     FightMode fighting = new FightMode(hero, getDefoultEnemy());
@@ -79,7 +80,7 @@ public class Game {
 
                     }
                     else {
-                        chestItem = new Food("chleb", 0.5, 1, 10);
+                        chestItem = new Food("Bread", 0.5, 1, 10);
                     }
                     hero.addToInventory(chestItem);
 
@@ -87,16 +88,16 @@ public class Game {
                 }
 
             } catch (GameOverException | NoEmptySlotException e) {
-                System.out.println("game over");
+                System.out.println("Game over");
                 break;
             }
 
-            System.out.println("hero: " + hero.getName() + " a " + hero.getRace());
+            System.out.println("Hero: " + hero.getName() + " a " + hero.getRace());
             if (hero instanceof Warior && ((Warior) hero).getWeapon()!=null){
                 int damage = hero.getDamage() + ((Warior) hero).getWeapon().getDamagePoints();
-                System.out.println("hp: " + hero.getCurrentHealth() + " att: " + damage);
-            }else System.out.println("hp: " + hero.getCurrentHealth() + " att: " + hero.getDamage());
-            System.out.println("enemy killed: " + enemyKilled);
+                System.out.println("Hp: " + hero.getCurrentHealth() + " att: " + damage);
+            }else System.out.println("Hp: " + hero.getCurrentHealth() + " att: " + hero.getDamage());
+            System.out.println("Enemy killed: " + enemyKilled);
         }
 
     }
@@ -148,7 +149,7 @@ public class Game {
 
     private static Enemy getDefoultEnemy() {
         Raider enemy = new Raider("Andrzej", 60, 10);
-        enemy.setWeapon(new Weapon("miecz", 2, 1, 20));
+        enemy.setWeapon(new Weapon("Miecz", 2, 1, 20));
         return enemy;
     }
 

@@ -12,10 +12,10 @@ public abstract class Enemy implements Vunerable{
     }
 
     @Override
-    public void recieveDamage(int points) {
+    public void receiveDamage(int points) {
         this.currentHealth -= points;
         if (this.currentHealth <= 0) {
-            System.out.println("dead");
+            System.out.println("Dead");
         }
     }
 

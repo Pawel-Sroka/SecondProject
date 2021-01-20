@@ -52,7 +52,7 @@ public class TradeMode {
                 customer.addToInventory(toBuy);
                 customer.setMoney(customer.getMoney() - trader.getStock().get(itemName).getPrice());
                 trader.getStock().remove(itemName);
-            } else System.out.println("not enought money");
+            } else System.out.println("Not enough money");
         }
     }
 }

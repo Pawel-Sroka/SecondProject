@@ -35,17 +35,17 @@ public class HeroRepository {
     private void preparedData() throws NoEmptySlotException, InvalidTypeException {
         Sorcerer sorc1 = new Sorcerer("Merlin", Race.HUMAN);
         sorc1.setDamage(15);
-        sorc1.addToInventory(new ArmorPart("tiara", 0.3, 1, 5, BodyParts.HEAD));
-        sorc1.addSpell(new Spell("fireball", 15, 0, 0));
-        sorc1.addSpell(new Spell("drain Life", 5, 5, 0));
-        heroes.put("czarodziej", sorc1);
+        sorc1.addToInventory(new ArmorPart("Tiara", 0.3, 1, 5, BodyParts.HEAD));
+        sorc1.addSpell(new Spell("Fireball", 15, 0, 0));
+        sorc1.addSpell(new Spell("Drain Life", 5, 5, 0));
+        heroes.put("Czarodziej", sorc1);
 
         Warior warior1 = new Warior("Glork", Race.GHOUL);
         warior1.setDamage(12);
-        warior1.addToInventory(new ArmorPart("chain mail", 5, 1, 10, BodyParts.TORSO));
-        warior1.addToInventory(new Weapon("short sword", 2, 1, 15));
+        warior1.addToInventory(new ArmorPart("Chain mail", 5, 1, 10, BodyParts.TORSO));
+        warior1.addToInventory(new Weapon("Short sword", 2, 1, 15));
         warior1.wearWeapon(1);
-        heroes.put("Ghul wojownik", warior1);
+        heroes.put("Ghoul warrior", warior1);
 
         Warior warior2 = new Warior("Karl", Race.MUTANT);
         warior2.setDamage(8);
@@ -53,25 +53,25 @@ public class HeroRepository {
         warior2.addToInventory(new ArmorPart("Worn boot", 1, 1, 2, BodyParts.RIGHT_LEG));
         warior2.addToInventory(new Weapon("Rusty sword", 2, 1, 5));
         warior2.wearWeapon(2);
-        heroes.put("Mutant wojownik", warior2);
+        heroes.put("Mutant warrior", warior2);
 
         Hero peasant = new Hero("Glut", Race.HUMAN);
         peasant.setDamage(5);
         peasant.addToInventory(new Food("Apple", 1, 2, 10));
-        heroes.put("wsiok", peasant);
+        heroes.put("Wsiok", peasant);
 
         Hero ghoul1 = new Hero("Rotten", Race.GHOUL);
         ghoul1.setDamage(11);
-        heroes.put("zgniły Ghul", ghoul1);
+        heroes.put("Rotten Ghoul", ghoul1);
 
         Hero countryMan = new Hero("Andrzej", Race.HUMAN);
         countryMan.setDamage(11);
-        heroes.put("Zwykly Wiesniak", countryMan);
+        heroes.put("Typical peasant", countryMan);
 
         Hero countryWoman = new Hero("Grażyna", Race.HUMAN);
         countryWoman.setDamage(7);
         countryWoman.addToInventory(new Food("Apple", 0.1, 1, 10));
-        heroes.put("Zwykla wiesniaczka", countryWoman);
+        heroes.put("Peasant woman", countryWoman);
 
         Warior warrior = new Warior("Geralt", Race.HUMAN);
         warrior.setDamage(30);
@@ -80,13 +80,13 @@ public class HeroRepository {
         warrior.addToInventory(new ArmorPart("Torso Armor", 1, 1, 50, BodyParts.TORSO));
         heroes.put("Geralt", warrior);
 
-        Warior warrior2 = new Warior("Ksiaze Mroku", Race.GHOUL);
+        Warior warrior2 = new Warior("Darkness Prince", Race.GHOUL);
         warrior2.setDamage(40);
         warrior2.addToInventory(new Weapon("Sword", 1, 1, 70));
         warrior2.wearWeapon(0);
         warrior2.addToInventory(new ArmorPart("Right Arm Armor", 0.5, 1, 20, BodyParts.RIGHT_ARM));
         //warrior2.wearArmor(0);
-        heroes.put("Ksiaze Mroku", warrior2);
+        heroes.put("Darkness Prince", warrior2);
 
         Sorcerer sorcerer = new Sorcerer("Gandalf", Race.MUTANT);
         sorcerer.addSpell(new Spell("Blabla", 10, 10, 10));

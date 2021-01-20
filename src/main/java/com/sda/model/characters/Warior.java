@@ -38,7 +38,7 @@ public class Warior extends Hero {
             super.addToInventory(this.weapon);
             this.weapon = toWear;
         } else {
-            throw new InvalidTypeException("it's not a weapon");
+            throw new InvalidTypeException("It's not a weapon");
         }
     }
 
@@ -54,12 +54,12 @@ public class Warior extends Hero {
     }
 
     @Override
-    public void recieveDamage(int points) throws GameOverException { // something is going wrong when Warior recive damage by swamp field
+    public void receiveDamage(int points) throws GameOverException { // something is going wrong when Warior recive damage by swamp field
         int damageResistance = this.armor.damageResistanceSummary();
         if (damageResistance < points) {
-            super.recieveDamage(points - damageResistance);
+            super.receiveDamage(points - damageResistance);
         } else {
-            System.out.println("no damage ");
+            System.out.println("No damage ");
         }
     }
 }

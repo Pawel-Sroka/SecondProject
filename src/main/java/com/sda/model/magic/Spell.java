@@ -33,12 +33,10 @@ public class Spell implements Comparable {
 
     @Override
     public String toString() {
-        return "Spell{" +
-                "spellName='" + spellName + '\'' +
-                ", spellDamage=" + spellDamage +
-                ", spellHealPoints=" + spellHealPoints +
-                ", spellDamageResistant=" + spellDamageResistant +
-                '}';
+        return "Spell: \""  + spellName  +
+                "\", Damage=" + spellDamage +
+                ", HealPoints=" + spellHealPoints +
+                ", DamageResistant=" + spellDamageResistant ;
     }
 
     public String getSpellName() {
