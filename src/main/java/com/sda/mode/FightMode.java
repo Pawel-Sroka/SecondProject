@@ -30,7 +30,11 @@ public class FightMode {
         if (enemy instanceof Raider) {
             enemyDamage = ((Raider) enemy).getWeapon().getDamagePoints();
         }
-        Weapon drop = ((Raider) enemy).getWeapon();
+        Weapon drop = null;
+        if (enemy instanceof Raider) {
+            drop = ((Raider) enemy).getWeapon();
+        }
+
         do {
             enemy.recieveDamage(heroDamage);
             System.out.println(" enemy got: "+heroDamage+" dmg");
@@ -41,8 +45,9 @@ public class FightMode {
                 }
                 break;
             }
+
             if (enemy instanceof Monster) {
-                enemyDamage = enemyDamage + (new Random().nextInt(21) / 100) * enemyDamage;
+                enemyDamage = enemyDamage + ((new Random().nextInt(21)+1) / 100) * enemyDamage;
             }
             hero.recieveDamage(enemyDamage);
             System.out.println(" hero got: "+enemyDamage+" dmg");

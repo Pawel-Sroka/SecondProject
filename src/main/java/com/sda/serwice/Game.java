@@ -55,11 +55,14 @@ public class Game {
                     System.out.println("unknow command");
             }
             try {
+                if (oldField == 'F'){
+                    System.out.println("you got to last location! Congratulations!");
+                                    }
                 if (oldField == '~') {
                     hero.recieveDamage(5);
                     System.out.println("rzeka hp-5");
                 }
-                if (oldField == '.') {
+                if (oldField == '.') { // something is going wrong when Warior recive damage by this field
                     hero.recieveDamage(1);
                     System.out.println("bagno hp-1");
                 }
@@ -89,10 +92,13 @@ public class Game {
             }
 
             System.out.println("hero: " + hero.getName() + " a " + hero.getRace());
-            System.out.println("hp: " + hero.getCurrentHealth() + " att: " + hero.getDamage());
+            if (hero instanceof Warior && ((Warior) hero).getWeapon()!=null){
+                int damage = hero.getDamage() + ((Warior) hero).getWeapon().getDamagePoints();
+                System.out.println("hp: " + hero.getCurrentHealth() + " att: " + damage);
+            }else System.out.println("hp: " + hero.getCurrentHealth() + " att: " + hero.getDamage());
             System.out.println("enemy killed: " + enemyKilled);
         }
-        System.out.println("you got to last location! Congratulations!");
+
     }
 
     private static void eat() throws InvalidTypeException {

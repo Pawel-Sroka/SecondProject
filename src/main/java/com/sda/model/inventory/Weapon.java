@@ -15,4 +15,9 @@ public class Weapon extends InventoryObject {
     public void setDamagePoints(int damagePoints) {
         this.damagePoints = damagePoints;
     }
+
+    @Override
+    public String toString() {
+        return "Weapon: \"" + getName() +"\", damage: " + damagePoints +", weight: "+ getWeight() + ", amount of: "+ getCount();
+    }
 }

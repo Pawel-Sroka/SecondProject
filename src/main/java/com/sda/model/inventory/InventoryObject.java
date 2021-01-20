@@ -15,7 +15,7 @@ public abstract class InventoryObject {
 
     @Override
     public String toString() {
-        return "InventoryObject{" + name + weight + count + '}';
+        return "Object: \"" + name +"\", weight: "+ weight + ", amount of: "+ count ;
     }
 
     @Override

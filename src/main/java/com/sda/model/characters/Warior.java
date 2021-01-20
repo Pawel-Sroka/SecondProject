@@ -54,7 +54,7 @@ public class Warior extends Hero {
     }
 
     @Override
-    public void recieveDamage(int points) throws GameOverException {
+    public void recieveDamage(int points) throws GameOverException { // something is going wrong when Warior recive damage by swamp field
         int damageResistance = this.armor.damageResistanceSummary();
         if (damageResistance < points) {
             super.recieveDamage(points - damageResistance);
