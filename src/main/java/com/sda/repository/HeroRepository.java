@@ -41,26 +41,26 @@ public class HeroRepository {
         heroes.put("Czarodziej", sorc1);
 
         Warior warior1 = new Warior("Glork", Race.GHOUL);
-        warior1.setDamage(12);
+        warior1.setDamage(20);
         warior1.addToInventory(new ArmorPart("Chain mail", 5, 1, 10, BodyParts.TORSO));
         warior1.addToInventory(new Weapon("Short sword", 2, 1, 15));
         warior1.wearWeapon(1);
-        heroes.put("Ghoul warrior", warior1);
+        heroes.put("Warrior", warior1);
 
-        Warior warior2 = new Warior("Karl", Race.MUTANT);
+       /* Warior warior2 = new Warior("Karl", Race.MUTANT);
         warior2.setDamage(8);
         warior2.addToInventory(new ArmorPart("Rusty helmet", 1, 1, 5, BodyParts.HEAD));
         warior2.addToInventory(new ArmorPart("Worn boot", 1, 1, 2, BodyParts.RIGHT_LEG));
         warior2.addToInventory(new Weapon("Rusty sword", 2, 1, 5));
         warior2.wearWeapon(2);
-        heroes.put("Mutant warrior", warior2);
+        heroes.put("Mutant warrior", warior2);*/
 
         Hero peasant = new Hero("Glut", Race.HUMAN);
-        peasant.setDamage(5);
+        peasant.setDamage(15);
         peasant.addToInventory(new Food("Apple", 1, 2, 10));
         heroes.put("Wsiok", peasant);
 
-        Hero ghoul1 = new Hero("Rotten", Race.GHOUL);
+        /*Hero ghoul1 = new Hero("Rotten", Race.GHOUL);
         ghoul1.setDamage(11);
         heroes.put("Rotten Ghoul", ghoul1);
 
@@ -90,7 +90,7 @@ public class HeroRepository {
 
         Sorcerer sorcerer = new Sorcerer("Gandalf", Race.MUTANT);
         sorcerer.addSpell(new Spell("Blabla", 10, 10, 10));
-        heroes.put("Gandalf", sorcerer);
+        heroes.put("Gandalf", sorcerer);*/
     }
 
     public void showHeroes(){

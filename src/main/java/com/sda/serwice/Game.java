@@ -22,6 +22,15 @@ public class Game {
     private static Hero hero;
     private static int enemyKilled = 0;
     private static char oldField = '_';
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String BLACK_BOLD = "\033[1;30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String GREEN_BRIGHT = "\033[0;92m";
 
     public static void main(String[] args) throws InvalidTypeException {
 
@@ -49,13 +58,28 @@ public class Game {
                 case "WEAPON":
                     if (hero instanceof Warior){
                         ((Warior) hero).getWeapon();
-                    }
+                    }else System.out.println("you are not a warrior!");
                     break;
 
                 default:
                     System.out.println("Unknow command");
             }
             try {
+                if (oldField == '#'){
+                    if (sc.equals("W")){
+                        move("S");
+                    }else
+                    if (sc.equals("S")){
+                        move("W");
+                    }else
+                    if (sc.equals("A")){
+                        move("D");
+                    }else
+                    if (sc.equals("D")){
+                        move("A");
+                    }
+                    System.out.println("Rocks, cannot pass");
+                }
                 if (oldField == 'F'){
                     System.out.println("you got to last location! Congratulations!");
                                     }
@@ -140,7 +164,6 @@ public class Game {
         if (move.equals("D") && heroPos.getX() + 1 < map[0].length) {
             heroPos.setX(1);
         }
-
         oldField = map[heroPos.getY()][heroPos.getX()];
         map[heroPos.getY()][heroPos.getX()] = 'H';
         // used to help set up field cooperation
@@ -157,9 +180,37 @@ public class Game {
         for (int i = 0; i < map.length; i++) {
             System.out.println();
             for (int j = 0; j < map[i].length; j++) {
-                System.out.print(map[i][j]);
+
+                colourFont(map[i][j]);
+
             }
         }
+    }
+    public static void colourFont(char mapChar){
+        if(mapChar == '~'){
+            System.out.print(ANSI_BLUE + mapChar + ANSI_RESET);
+        }else
+        if (mapChar == 'E'){
+            System.out.print(ANSI_RED + mapChar + ANSI_RESET);
+        }else
+        if (mapChar == '?'){
+            System.out.print(ANSI_YELLOW + mapChar+ ANSI_RESET);
+        }else
+        if (mapChar == '_'){
+            System.out.print(ANSI_GREEN + mapChar+ ANSI_RESET);
+        }else
+        if (mapChar == '['){
+            System.out.print(ANSI_PURPLE + mapChar+ ANSI_RESET);
+        }else
+        if (mapChar == 'F'){
+            System.out.print(ANSI_CYAN + mapChar + ANSI_RESET);
+        }else
+        if (mapChar == '.'){
+            System.out.print(GREEN_BRIGHT + mapChar + ANSI_RESET);
+        }else
+        if (mapChar == '#'){
+            System.out.print(BLACK_BOLD + mapChar+ ANSI_RESET);
+        }else System.out.print(mapChar);
     }
 
     public static void showHints() {

@@ -22,10 +22,7 @@ public class FightMode {
 
         if (hero instanceof Warior) {
             heroDamage = ((Warior) hero).getWeapon().getDamagePoints();
-
-
         }
-
         int enemyDamage = enemy.getDamage();
         if (enemy instanceof Raider) {
             enemyDamage = ((Raider) enemy).getWeapon().getDamagePoints();
@@ -34,7 +31,6 @@ public class FightMode {
         if (enemy instanceof Raider) {
             drop = ((Raider) enemy).getWeapon();
         }
-
         do {
             enemy.receiveDamage(heroDamage);
             System.out.println(" Enemy got: "+heroDamage+" dmg");
