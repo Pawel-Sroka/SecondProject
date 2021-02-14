@@ -13,6 +13,11 @@ import com.sda.model.inventory.InventoryObject;
 import com.sda.model.inventory.Weapon;
 import com.sda.repository.HeroRepository;
 
+import java.awt.*;
+import java.io.Console;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Game {
@@ -33,125 +38,131 @@ public class Game {
     public static final String GREEN_BRIGHT = "\033[0;92m";
 
     public static void main(String[] args) throws InvalidTypeException {
-
-        init();
-        while (!heroPos.equals(finishPos)) {
-
-            showMap();
-            String sc = new Scanner(System.in).nextLine().toUpperCase();
-            switch (sc) {
-                case "HELP":
-                    showHints();
-                    break;
-                case "W":
-                case "S":
-                case "A":
-                case "D":
-                    move(sc);
-                    break;
-                case "INVENTORY":
-                    hero.showInventory();
-                    break;
-                case "EAT":
-                    eat();
-                    break;
-                case "WEAPON":
-                    if (hero instanceof Warior){
-                        ((Warior) hero).getWeapon();
-                    }else System.out.println("you are not a warrior!");
-                    break;
-
-                default:
-                    System.out.println("Unknow command");
-            }
+        // WindowMaker.setupJFrameAndGet("Hello in game", 800, 600);
+        // WindowMaker.setupJTextAreaAndGet("",20,50,false,true,true,true,20,20,700,500);
+        /*Console console = System.console();
+        if (console == null && !GraphicsEnvironment.isHeadless()) {
+            String filename = Game.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
             try {
-                if (oldField == '#'){
-                    if (sc.equals("W")){
-                        move("S");
-                    }else
-                    if (sc.equals("S")){
-                        move("W");
-                    }else
-                    if (sc.equals("A")){
-                        move("D");
-                    }else
-                    if (sc.equals("D")){
-                        move("A");
-                    }
-                    System.out.println("Rocks, cannot pass");
+                File batch = new File("Launcher.bat");
+                if (!batch.exists()) {
+                    batch.createNewFile();
+                    PrintWriter writer = new PrintWriter(batch);
+                    writer.println("@echo off");
+                    writer.println("java -jar " + filename);
+                    writer.println("exit");
+                    writer.flush();
                 }
-                if (oldField == 'F'){
-                    System.out.println("you got to last location! Congratulations!");
-                                    }
-                if (oldField == '~') {
-                    hero.receiveDamage(5);
-                    System.out.println("River hp-5");
-                }
-                if (oldField == '.') { // something is going wrong when Warior recive damage by this field
-                    hero.receiveDamage(1);
-                    System.out.println("Swamp hp-1");
-                }
-                if (oldField == 'E') {
-                    FightMode fighting = new FightMode(hero, getDefoultEnemy());
-                    fighting.fight();
-                    enemyKilled += 1;
-                    oldField = 'X';
-                }
-                if (oldField == '?'){
-                    InventoryObject chestItem = null;
-                    if (hero instanceof Warior) {
-                        chestItem = new Weapon("Excalibur", 1,1,40);
-
-                    }
-                    else {
-                        chestItem = new Food("Bread", 0.5, 1, 10);
-                    }
-                    hero.addToInventory(chestItem);
-
-                    oldField = ']';
-                }
-
-            } catch (GameOverException | NoEmptySlotException e) {
-                System.out.println("Game over");
-                break;
+                Runtime.getRuntime().exec("cmd /c start \"\" " + batch.getPath());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            System.out.println("Hero: " + hero.getName() + " a " + hero.getRace());
-            if (hero instanceof Warior && ((Warior) hero).getWeapon()!=null){
-                int damage = hero.getDamage() + ((Warior) hero).getWeapon().getDamagePoints();
-                System.out.println("Hp: " + hero.getCurrentHealth() + " att: " + damage);
-            }else System.out.println("Hp: " + hero.getCurrentHealth() + " att: " + hero.getDamage());
-            System.out.println("Enemy killed: " + enemyKilled);
+        } else {*/
+            init();
+            while (!heroPos.equals(finishPos)) {
+                showMap();
+                String sc = new Scanner(System.in).nextLine().toUpperCase();
+                switch (sc) {
+                    case "HELP":
+                        showHints();
+                        break;
+                    case "W":
+                    case "S":
+                    case "A":
+                    case "D":
+                        move(sc);
+                        break;
+                    case "INVENTORY":
+                        hero.showInventory();
+                        break;
+                    case "EAT":
+                        eat();
+                        break;
+                    case "WEAPON":
+                        if (hero instanceof Warior) {
+                            ((Warior) hero).getWeapon();
+                        } else System.out.println("you are not a warrior!");
+                        break;
+                    default:
+                        System.out.println("Unknow command");
+                }
+                try {
+                    if (oldField == '#') {
+                        if (sc.equals("W")) {
+                            move("S");
+                        } else if (sc.equals("S")) {
+                            move("W");
+                        } else if (sc.equals("A")) {
+                            move("D");
+                        } else if (sc.equals("D")) {
+                            move("A");
+                        }
+                        System.out.println("Rocks, cannot pass");
+                    }
+                    if (oldField == 'F') {
+                        System.out.println("you got to last location! Congratulations!");
+                    }
+                    if (oldField == '~') {
+                        hero.receiveDamage(5);
+                        System.out.println("River hp-5");
+                    }
+                    if (oldField == '.') { // something is going wrong when Warior recive damage by this field
+                        hero.receiveDamage(1);
+                        System.out.println("Swamp hp-1");
+                    }
+                    if (oldField == 'E') {
+                        FightMode fighting = new FightMode(hero, getDefoultEnemy());
+                        fighting.fight();
+                        enemyKilled += 1;
+                        oldField = 'X';
+                    }
+                    if (oldField == '?') {
+                        InventoryObject chestItem = null;
+                        if (hero instanceof Warior) {
+                            chestItem = new Weapon("Excalibur", 1, 1, 40);
+                        } else {
+                            chestItem = new Food("Bread", 0.5, 1, 10);
+                        }
+                        hero.addToInventory(chestItem);
+                        oldField = ']';
+                    }
+                } catch (GameOverException | NoEmptySlotException e) {
+                    System.out.println("Game over");
+                    break;
+                }
+                System.out.println("Hero: " + hero.getName() + " a " + hero.getRace());
+                if (hero instanceof Warior && ((Warior) hero).getWeapon() != null) {
+                    int damage = hero.getDamage() + ((Warior) hero).getWeapon().getDamagePoints();
+                    System.out.println("Hp: " + hero.getCurrentHealth() + " att: " + damage);
+                } else System.out.println("Hp: " + hero.getCurrentHealth() + " att: " + hero.getDamage());
+                System.out.println("Enemy killed: " + enemyKilled);
+            }
         }
-
-    }
+    //}
 
     private static void eat() throws InvalidTypeException {
-
         System.out.println("podaj numer slotu z jedzeniem: ");
-        int slotNr =new Scanner(System.in).nextInt();
+        int slotNr = new Scanner(System.in).nextInt();
         hero.eatFood(slotNr);
-}
-    private static void init() {
+    }
 
+    private static void init() {
         map = FileService.mapLoad();
         heroPos = findChar('H');
         finishPos = findChar('F');
-
         HeroRepository heroRepository = new HeroRepository();
-        heroRepository.showHeroes();
-        System.out.println("write hero name: ");
-        String name = new Scanner(System.in).nextLine();
-        hero = heroRepository.getHeroes().get(name);
-
+        do {
+            heroRepository.showHeroes();
+            System.out.println("write hero name: ");
+            String name = new Scanner(System.in).nextLine();
+            String cap = name.substring(0, 1).toUpperCase() + name.substring(1);
+            hero = heroRepository.getHeroes().get(cap);
+        } while (hero == null);
         showHints();
-
     }
 
     private static void move(String move) {
-
         map[heroPos.getY()][heroPos.getX()] = oldField;
-
         if (move.equals("W") && heroPos.getY() - 1 >= 0) {
             heroPos.setY(-1);
         }
@@ -180,37 +191,29 @@ public class Game {
         for (int i = 0; i < map.length; i++) {
             System.out.println();
             for (int j = 0; j < map[i].length; j++) {
-
                 colourFont(map[i][j]);
-
             }
         }
     }
-    public static void colourFont(char mapChar){
-        if(mapChar == '~'){
+
+    public static void colourFont(char mapChar) {
+        if (mapChar == '~') {
             System.out.print(ANSI_BLUE + mapChar + ANSI_RESET);
-        }else
-        if (mapChar == 'E'){
+        } else if (mapChar == 'E') {
             System.out.print(ANSI_RED + mapChar + ANSI_RESET);
-        }else
-        if (mapChar == '?'){
-            System.out.print(ANSI_YELLOW + mapChar+ ANSI_RESET);
-        }else
-        if (mapChar == '_'){
-            System.out.print(ANSI_GREEN + mapChar+ ANSI_RESET);
-        }else
-        if (mapChar == '['){
-            System.out.print(ANSI_PURPLE + mapChar+ ANSI_RESET);
-        }else
-        if (mapChar == 'F'){
+        } else if (mapChar == '?') {
+            System.out.print(ANSI_YELLOW + mapChar + ANSI_RESET);
+        } else if (mapChar == '_') {
+            System.out.print(ANSI_GREEN + mapChar + ANSI_RESET);
+        } else if (mapChar == '[') {
+            System.out.print(ANSI_PURPLE + mapChar + ANSI_RESET);
+        } else if (mapChar == 'F') {
             System.out.print(ANSI_CYAN + mapChar + ANSI_RESET);
-        }else
-        if (mapChar == '.'){
+        } else if (mapChar == '.') {
             System.out.print(GREEN_BRIGHT + mapChar + ANSI_RESET);
-        }else
-        if (mapChar == '#'){
-            System.out.print(BLACK_BOLD + mapChar+ ANSI_RESET);
-        }else System.out.print(mapChar);
+        } else if (mapChar == '#') {
+            System.out.print(BLACK_BOLD + mapChar + ANSI_RESET);
+        } else System.out.print(mapChar);
     }
 
     public static void showHints() {
@@ -238,5 +241,4 @@ public class Game {
         }
         return null;
     }
-
 }
