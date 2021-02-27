@@ -33,7 +33,7 @@ public class FightMode {
         }
         do {
             enemy.receiveDamage(heroDamage);
-            System.out.println(" Enemy got: "+heroDamage+" dmg");
+            System.out.println(" Enemy got: " + heroDamage + " dmg");
             if (enemy.getCurrentHealth() <= 0) {
                 System.out.println("Enemy killed");
                 if (drop != null) {
@@ -43,10 +43,10 @@ public class FightMode {
             }
 
             if (enemy instanceof Monster) {
-                enemyDamage = enemyDamage + ((new Random().nextInt(21)+1) / 100) * enemyDamage;
+                enemyDamage = enemyDamage + ((new Random().nextInt(21) + 1) / 100) * enemyDamage;
             }
             hero.receiveDamage(enemyDamage);
-            System.out.println(" Hero got: "+enemyDamage+" dmg");
+            System.out.println(" Hero got: " + enemyDamage + " dmg");
         }
         while (hero.getCurrentHealth() > 0 || enemy.getCurrentHealth() > 0);
         if (hero.getCurrentHealth() <= 0) {

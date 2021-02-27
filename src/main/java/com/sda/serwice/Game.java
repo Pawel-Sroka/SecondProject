@@ -13,11 +13,6 @@ import com.sda.model.inventory.InventoryObject;
 import com.sda.model.inventory.Weapon;
 import com.sda.repository.HeroRepository;
 
-import java.awt.*;
-import java.io.Console;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Game {
@@ -38,26 +33,6 @@ public class Game {
     public static final String GREEN_BRIGHT = "\033[0;92m";
 
     public static void main(String[] args) throws InvalidTypeException {
-        // WindowMaker.setupJFrameAndGet("Hello in game", 800, 600);
-        // WindowMaker.setupJTextAreaAndGet("",20,50,false,true,true,true,20,20,700,500);
-        /*Console console = System.console();
-        if (console == null && !GraphicsEnvironment.isHeadless()) {
-            String filename = Game.class.getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
-            try {
-                File batch = new File("Launcher.bat");
-                if (!batch.exists()) {
-                    batch.createNewFile();
-                    PrintWriter writer = new PrintWriter(batch);
-                    writer.println("@echo off");
-                    writer.println("java -jar " + filename);
-                    writer.println("exit");
-                    writer.flush();
-                }
-                Runtime.getRuntime().exec("cmd /c start \"\" " + batch.getPath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {*/
             init();
             while (!heroPos.equals(finishPos)) {
                 showMap();
@@ -137,8 +112,8 @@ public class Game {
                 } else System.out.println("Hp: " + hero.getCurrentHealth() + " att: " + hero.getDamage());
                 System.out.println("Enemy killed: " + enemyKilled);
             }
+
         }
-    //}
 
     private static void eat() throws InvalidTypeException {
         System.out.println("podaj numer slotu z jedzeniem: ");
